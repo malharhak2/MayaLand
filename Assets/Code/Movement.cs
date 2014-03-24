@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour {
 	private Animator animator;
 	// Use this for initialization
 	void Start () {
-	
+		direction = Vector3.zero;
 	}
 
 	void Awake() {
@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log ("dir" + direction.ToString());
 		if (direction.magnitude > 0.1) {
 			startMoving();
 		} else {
