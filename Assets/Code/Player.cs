@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
@@ -7,7 +8,7 @@ public class Player : MonoBehaviour {
 
 	public float timeScale;
 
-
+	public List<Stats> stats = new List<Stats> ();
 
 	private Animator animator;
 	private Movement movement;
