@@ -28,9 +28,6 @@ public class Stats : MonoBehaviour {
 			die();
 		}
 	}
-	void OnGUI () {
-		GUI.Label (new Rect(20f, 20f, 200f, 20f), "life : " + health);
-	}
 
 	void die () {
 		Destroy(gameObject);
