@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using AssemblyCSharp;
 
 public class Movement : MonoBehaviour {
 
@@ -7,7 +8,9 @@ public class Movement : MonoBehaviour {
 	public float runSpeed;
 	public float runTime = 2;
 	public Vector3 direction;
+	public Transform level;
 
+	private Vector3 previousPosition;
 	private bool running = false;
 	private bool moving = false;
 	private float moveStart;
@@ -20,9 +23,11 @@ public class Movement : MonoBehaviour {
 
 	void Awake() {
 		animator = GetComponent<Animator>();
+		previousPosition = transform.position;
 	}
 	// Update is called once per frame
 	void Update () {
+		previousPosition = transform.position;
 		//Debug.Log ("dir" + direction.ToString());
 		if (direction.magnitude > 0.1) {
 			startMoving();
@@ -62,7 +67,9 @@ public class Movement : MonoBehaviour {
 		if (moving) {
 			transform.up = direction;
 			float spd = running ? runSpeed : speed;
-			transform.Translate (new Vector3(0, spd * Time.deltaTime, 0));
+			//transform.Translate (new Vector3(0, spd * Time.deltaTime, 0));
+			Debug.Log ("Allo");
+			rigidbody2D.velocity = new Vector2(0, spd * Time.deltaTime);
 		}
 	}
 }

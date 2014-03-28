@@ -23,8 +23,8 @@ public class GenerateWorld : MonoBehaviour {
 					f2.parent = transform;
 					map[i, j] = MapCase.Wall;
 				} else if (Random.Range (0, 1f) > 0.995f) {
-					Transform f3 = Instantiate (enemy, new Vector3(i - levelWidth / 2, j - levelHeight / 2, 0), Quaternion.identity) as Transform;
-					f3.parent = transform;
+					//Transform f3 = Instantiate (enemy, new Vector3(i - levelWidth / 2, j - levelHeight / 2, 0), Quaternion.identity) as Transform;
+					//f3.parent = transform;
 				}
 			}
 		}

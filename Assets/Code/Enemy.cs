@@ -30,7 +30,6 @@ public class Enemy : MonoBehaviour {
 	private Movement movement;
 	// Use this for initialization
 	void Start () {
-		Debug.Log ("coucou");
 	}
 
 	void Awake() {
