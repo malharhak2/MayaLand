@@ -1,10 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+//using System.Drawing.Color;
 
 public class Player : MonoBehaviour {
 
-
+	public int life = 10; 
+	public int stamina = 100;
+	public int money = 100;
 
 	public float timeScale;
 
@@ -31,3 +34,6 @@ public class Player : MonoBehaviour {
 	}
 
 }
+
+
+

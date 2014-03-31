@@ -29,6 +29,7 @@ public class Stats : MonoBehaviour {
 		}
 	}
 
+
 	void die () {
 		Destroy(gameObject);
 	}
