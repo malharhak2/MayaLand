@@ -6,6 +6,7 @@ public class ModifyTerrain : MonoBehaviour {
 	public Transform player;
 	public int loadDistanceX;
 	public int loadDistanceY;
+	public bool mouseCapture = false;
 
 	private World world;
 	private GameObject cameraGO;
@@ -27,7 +28,14 @@ public class ModifyTerrain : MonoBehaviour {
 		if(Input.GetMouseButtonDown(1)){
 			AddBlockCursor(BlockType.Stone);
 		}
-		Screen.lockCursor = true;
+		if (Input.GetButtonDown ("CaptureMouse")) {
+			mouseCapture = !mouseCapture;
+		}
+		if (mouseCapture) {
+			Screen.lockCursor = true;
+		} else {
+			Screen.lockCursor = false;
+		}
 		LoadChunks(player.position, loadDistanceX, loadDistanceY);
 	}
 	public void LoadChunks(Vector3 playerPos, float distToLoad, float distToUnload) {
