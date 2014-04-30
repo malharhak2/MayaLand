@@ -19,9 +19,6 @@ public class Chunk : MonoBehaviour {
 	private List<Vector2> newUV = new List<Vector2>();
 
 	private float tUnit = 0.25f;
-	private Vector2 tStone = new Vector2(1, 0);
-	private Vector2 tGrass = new Vector2(0, 1);
-	private Vector2 tGrassTop = new Vector2(1, 1);
 	private Mesh mesh;
 	private MeshCollider col;
 

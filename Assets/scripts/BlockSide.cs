@@ -7,5 +7,9 @@ public enum BlockSide {
 	Top,
 	Bot,
 	Front,
-	Back
+	Back,
+	FrontRight,
+	FrontLeft,
+	BackRight,
+	BackLeft
 }

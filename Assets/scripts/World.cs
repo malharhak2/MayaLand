@@ -4,7 +4,7 @@ using System.Collections;
 public class World : MonoBehaviour {
 
 	public GameObject chunk;
-	public Chunk[,,] chunks;
+	public VoxelChunk[,,] chunks;
 	public int chunkSize = 16;
 
 	public BlockType[,,] data;
@@ -37,7 +37,7 @@ public class World : MonoBehaviour {
 			}
 		}
 
-		chunks = new Chunk[Mathf.FloorToInt (worldX / chunkSize),
+		chunks = new VoxelChunk[Mathf.FloorToInt (worldX / chunkSize),
 		                        Mathf.FloorToInt(worldY / chunkSize),
 		                        Mathf.FloorToInt(worldZ / chunkSize)];
 		//GenEverything();
@@ -93,7 +93,7 @@ public class World : MonoBehaviour {
 									z * actChunkSize - .5f * blockSize),
 					   	Quaternion.identity) as GameObject;
 					newChunk.transform.parent = transform;
-					Chunk newChunkScript = newChunk.GetComponent<Chunk>();
+					VoxelChunk newChunkScript = newChunk.GetComponent<VoxelChunk>();
 					chunks[x, y, z] = newChunkScript;
 					newChunkScript.worldGO = gameObject;
 					newChunkScript.chunkSize = chunkSize;
@@ -114,7 +114,7 @@ public class World : MonoBehaviour {
 						z * actChunkSize - .5f * blockSize),
                    new Quaternion (0, 0, 0, 0)) as GameObject;
 			newChunk.transform.parent = transform;
-			Chunk newChunkScript = newChunk.GetComponent<Chunk>();
+			VoxelChunk newChunkScript = newChunk.GetComponent<VoxelChunk>();
 			chunks[x, y, z] = newChunkScript;
 			newChunkScript.worldGO = gameObject;
 			newChunkScript.chunkSize = chunkSize;
