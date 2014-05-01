@@ -91,7 +91,7 @@ public class UILabelInspector : UIWidgetInspector
 		if (mFontType == FontType.NGUI)
 		{
 			fnt = NGUIEditorTools.DrawProperty("", serializedObject, "mFont", GUILayout.MinWidth(40f));
-			
+
 			if (fnt.objectReferenceValue != null)
 			{
 				NGUISettings.ambigiousFont = fnt.objectReferenceValue;
@@ -158,7 +158,7 @@ public class UILabelInspector : UIWidgetInspector
 			bool ww = GUI.skin.textField.wordWrap;
 			GUI.skin.textField.wordWrap = true;
 			SerializedProperty sp = serializedObject.FindProperty("mText");
-#if UNITY_3_5
+#if UNITY_3_5 || UNITY_4_0 || UNITY_4_1 || UNITY_4_2
 			GUI.changed = false;
 			string text = EditorGUILayout.TextArea(sp.stringValue, GUI.skin.textArea, GUILayout.Height(100f));
 			if (GUI.changed) sp.stringValue = text;
