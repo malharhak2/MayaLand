@@ -35,6 +35,9 @@ public static class Noise
 			perm[i] = p[i & 255];
 	}
 	// simplex noise in 2D, 3D and 4D
+	private static int startX = Random.Range (-9999999, 9999999);
+	private static int startY = Random.Range (-9999999, 9999999);
+	private static int startZ = Random.Range (-9999999, 9999999);
 	private static int[][] grad3 = new int[][] {
 		new int[] {1,1,0}, new int[] {-1,1,0}, new int[] {1,-1,0}, new int[] {-1,-1,0},
 		new int[] {1,0,1}, new int[] {-1,0,1}, new int[] {1,0,-1}, new int[] {-1,0,-1},
@@ -70,6 +73,9 @@ public static class Noise
 	
 	public static float GetNoise(double pX, double pY, double pZ)
 	{
+		pX += startX;
+		pY += startY;
+		pZ += startZ;
 		double n0, n1, n2, n3; // Noise contributions from the four corners
 		// Skew the input space to determine which simplex cell we're in
 		double F3 = 1.0 / 3.0;
