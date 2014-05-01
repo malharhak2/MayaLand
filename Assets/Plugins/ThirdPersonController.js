@@ -13,6 +13,8 @@ public var runMaxAnimationSpeed : float = 1.0;
 public var jumpAnimationSpeed : float = 1.15;
 public var landAnimationSpeed : float = 1.0;
 
+public var movementSpeed = 2.0;
+
 private var _animation : Animation;
 
 enum CharacterState {
@@ -187,26 +189,28 @@ function UpdateSmoothedMovementDirection ()
 		//* We want to support analog input but make sure you cant walk faster diagonally than just forward or sideways
 		var targetSpeed = Mathf.Min(targetDirection.magnitude, 1.0);
 	
-		_characterState = CharacterState.Idle;
+		if (!isMoving) {
+			_characterState = CharacterState.Idle;
+		}
 		
 		// Pick speed modifier
-		if (Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift))
-		{
-			targetSpeed *= runSpeed;
-			_characterState = CharacterState.Running;
-		}
-		else if (Time.time - trotAfterSeconds > walkTimeStart)
-		{
-			targetSpeed *= trotSpeed;
-			_characterState = CharacterState.Trotting;
-		}
-		else
-		{
-			targetSpeed *= walkSpeed;
-			_characterState = CharacterState.Walking;
-		}
+//		if (Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift))
+//		{
+//			targetSpeed *= runSpeed;
+//			_characterState = CharacterState.Running;
+//		}
+//		else if (Time.time - trotAfterSeconds > walkTimeStart)
+//		{
+//			targetSpeed *= trotSpeed;
+//			_characterState = CharacterState.Trotting;
+//		}
+//		else
+//		{
+//			targetSpeed *= walkSpeed;
+//			_characterState = CharacterState.Walking;
+//		}
 		
-		moveSpeed = Mathf.Lerp(moveSpeed, targetSpeed, curSmooth);
+		moveSpeed = isMoving ? movementSpeed : 0;
 		
 		// Reset walk time start when we slow down
 		if (moveSpeed < walkSpeed * 0.3)
@@ -226,7 +230,19 @@ function UpdateSmoothedMovementDirection ()
 
 		
 }
-
+function StartRunning () {
+isMoving = true;
+	_characterState = CharacterState.Running;
+}
+function StartWalking () {
+	_characterState = CharacterState.Walking;
+}
+function SetMoveSpeed (speed) {
+	movementSpeed = speed;
+}
+function StopMoving () {
+	isMoving = false;
+}
 
 function ApplyJumping ()
 {

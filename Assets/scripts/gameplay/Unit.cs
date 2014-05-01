@@ -4,18 +4,31 @@ using System.Collections;
 public class Unit : MonoBehaviour {
 
 	public int maxLife;
-	public int life;
+	public float life;
+	public float lifePart;
 
 	public int maxStamina;
-	public int stamina;
+	public float stamina;
+	public float staminaPart;
 
 	// Use this for initialization
-	void Start () {
-	
+	public virtual void Start () {
+		life = maxLife;
+		stamina = maxStamina;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
+	}
+	public virtual void LateUpdate () {
+		if (life > maxLife) {
+			life = maxLife;
+		}
+		if (stamina > maxStamina) {
+			stamina = maxStamina;
+		}
+		lifePart = life / maxLife;
+		staminaPart =  stamina / maxStamina;
 	}
 }
