@@ -23,7 +23,8 @@ public class ThirdPersonController : MonoBehaviour {
 		Trotting = 2,
 		Running = 3,
 		Jumping = 4, 
-		Rolling = 5
+		Rolling = 5,
+		Attacking = 6
 	}
 	
 	private CharacterState _characterState;
