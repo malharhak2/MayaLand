@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 
 public class VoxelChunk : MonoBehaviour {
 
@@ -25,6 +24,7 @@ public class VoxelChunk : MonoBehaviour {
 	private int triangleCount;
 	private int faceCount;
 
+	public Transform tree;
 	private MeshCollider col;
 	// Use this for initialization
 	void Start () {
@@ -49,11 +49,15 @@ public class VoxelChunk : MonoBehaviour {
 				for (int z = 0; z < chunkSize; z++) {
 					if (getBlock (x, y, z) != BlockType.Air) {
 						GenerateBlock(x, y, z);
+
 					}
 				}
 			}
 		}
 		UpdateMesh ();
+	}
+	void GenerateTree (int x, int y, int z) {
+		Instantiate (tree, transform.position + new Vector3(x, y + 1, z) * blockScale, Quaternion.identity);
 	}
 	// TODO : Optimiser les cas particuliers
 	void GenerateBlock (int x, int y, int z) {
@@ -102,6 +106,9 @@ public class VoxelChunk : MonoBehaviour {
 			GenerateSlope(x, y, z, side);
 		} else {
 			GenerateSquare (x, y, z, side);
+			if (Random.Range (1, 600) < 4) {
+				GenerateTree(x, y, z);
+			}
 		}
 	}
 	void GenerateSquare (int x, int y, int z, BlockSide side) {

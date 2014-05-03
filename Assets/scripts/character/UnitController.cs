@@ -59,6 +59,7 @@ public class UnitController : MonoBehaviour {
 	private float moveSpeed = 0.0F;
 	private float movementSpeed = 0.0F;
 	private float rollSpeed = 0.0F;
+	private Vector3 targetDirection = Vector3.zero;
 	private Spells currentSpell;
 	// The last collision flags returned from controller.Move
 	private CollisionFlags collisionFlags ; 
@@ -117,28 +118,7 @@ public AnimationClip jumpPoseAnimation;
 		Transform cameraTransform = Camera.main.transform;
 		bool grounded = IsGrounded();
 		// Forward vector relative to the camera along the x-z plane    
-		Vector3 forward= cameraTransform.TransformDirection(Vector3.forward);
-		forward.y = 0;
-		forward = forward.normalized;
-		// Right vector relative to the camera
-		// Always orthogonal to the forward vector
-		Vector3 right= new Vector3(forward.z, 0, -forward.x);
-		
-		float v= Input.GetAxisRaw("Vertical");
-		float h= Input.GetAxisRaw("Horizontal");
-		
-		// Are we moving backwards or looking backwards
-		if (v < -0.2f) {
-			movingBack = true;
-		} else {
-			movingBack = false;
-		}
-		
-		bool wasMoving= isMoving;
-		isMoving = Mathf.Abs (h) > 0.1f || Mathf.Abs (v) > 0.1f;
-
-		// Target direction relative to the camera
-		Vector3 targetDirection= h * right + v * forward;
+		bool wasMoving = isMoving;
 		// Grounded controls
 		if (grounded)
 		{
@@ -225,6 +205,9 @@ public AnimationClip jumpPoseAnimation;
 	}
 	public void SetMoveSpeed (float speed) {
 		movementSpeed = speed;
+	}
+	public void SetDirection (Vector3 direction) {
+		targetDirection = direction;
 	}
 	void  ApplyJumping (){
 		// Prevent jumping too fast after each other

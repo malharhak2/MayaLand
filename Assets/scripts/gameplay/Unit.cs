@@ -16,13 +16,17 @@ public class Unit : MonoBehaviour {
 	public float attackSpeed = 1;
 
 	[SerializeField]
+	public Spells[] usableSpells;
+
+	protected Spell[] spellsInfo;
+	[SerializeField]
 	protected float moveSpeed;
 	[SerializeField]
 	protected float rotationSpeed;
 	protected UnitController charController;
 
 
-	private SpellsList spellsList;
+	public SpellsList spellsList;
 	private float lastSpell;
 	private float lastSpellTimer;
 	private bool isCasting = false;
@@ -32,8 +36,12 @@ public class Unit : MonoBehaviour {
 		life = maxLife;
 		stamina = maxStamina;
 		spellsList = gameSpells.GetComponent<SpellsList>();
+		Debug.Log (spellsList.ToString ());
+		Debug.Log (typeof (SpellsList));
 	}
+	public virtual void Awake() {
 
+	}
 	public void StartRunning () {
 		charController.StartRunning ();
 	}
@@ -42,6 +50,9 @@ public class Unit : MonoBehaviour {
 	}
 	public void SetMoveSpeed (float speed) {
 		charController.SetMoveSpeed(speed);
+	}
+	public void SetDirection (Vector3 direction) {
+		charController.SetDirection (direction);
 	}
 	// Update is called once per frame
 	public virtual void Update () {
@@ -93,5 +104,10 @@ public class Unit : MonoBehaviour {
 		Spell spellScript = instantiated.GetComponent<Spell>();
 		spellScript.attackTeam = team;
 		spellScript.attackerId = id;
+		Buff buffScript = instantiated.GetComponent<Buff>();
+		if (buffScript != null) {
+			buffScript.target = transform;
+		}
+		
 	}
 }

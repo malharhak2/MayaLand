@@ -2,6 +2,13 @@
 using System.Collections;
 
 public class Spell : MonoBehaviour {
+	
+	public string name;
+	public string description;
+	[HideInInspector][SerializeField] 
+	public UIAtlas mAtlas;
+	 
+	public string mSpriteName;
 
 	public float castTime;
 	public float damages;
@@ -29,4 +36,5 @@ public class Spell : MonoBehaviour {
 		Debug.Log ("Trigger enter");
 		other.SendMessage ("Hit", this);
 	}
+
 }

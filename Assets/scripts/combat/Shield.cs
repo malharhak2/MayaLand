@@ -3,14 +3,14 @@ using System.Collections;
 
 public class Shield : MonoBehaviour {
 
-	public Transform target;
+	private Buff buffScript;
 	// Use this for initialization
 	void Start () {
-	
+		buffScript = GetComponent<Buff>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = target.position;
+		transform.position = buffScript.target.position;
 	}
 }
