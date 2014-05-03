@@ -19,6 +19,9 @@ public class MainMenu : MonoBehaviour {
 	public void TerrainPlay () {
 		Application.LoadLevel ("terrain");
 	}
+	public void PrebuiltPlay () {
+		Application.LoadLevel("prebuilt");
+	}
 	public void Menu () {
 		Application.LoadLevel ("menu");
 	}

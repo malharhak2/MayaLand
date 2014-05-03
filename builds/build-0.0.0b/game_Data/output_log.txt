@@ -1,0 +1,61 @@
+Initialize engine version: 4.3.1f1 (cebd4d9b5122)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon HD 6800 Series (ID=0x6738)
+    Vendor:   ATI
+    VRAM:     1003 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\Malhar\Documents\mayaland\build-0.0.0b\game_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\Malhar\Documents\mayaland\build-0.0.0b\game_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\Malhar\Documents\mayaland\build-0.0.0b\game_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\Malhar\Documents\mayaland\build-0.0.0b\game_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\Malhar\Documents\mayaland\build-0.0.0b\game_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading D:\Malhar\Documents\mayaland\build-0.0.0b\game_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+- Completed reload, in  0.063 seconds
+desktop: 1920x1080 60Hz; virtual: 3840x1080 at -1920,0
+<RI> Initializing input.
+<RI> Input initialized.
+UnloadTime: 3.586932 ms
+The character you would like to control doesn't have animations. Moving her might look weird.
+UnityEngine.Debug:Internal_Log(Int32, String, Object)
+UnityEngine.Debug:Log(Object)
+ThirdPersonController:Awake() (at D:\Malhar\Documents\mayaland\Assets\scripts\character\ThirdPersonController.cs:87)
+ 
+(Filename: D Line: 0)
+
+No idle animation found. Turning off animations.
+UnityEngine.Debug:Internal_Log(Int32, String, Object)
+UnityEngine.Debug:Log(Object)
+ThirdPersonController:Awake() (at D:\Malhar\Documents\mayaland\Assets\scripts\character\ThirdPersonController.cs:96)
+ 
+(Filename: D Line: 0)
+
+No walk animation found. Turning off animations.
+UnityEngine.Debug:Internal_Log(Int32, String, Object)
+UnityEngine.Debug:Log(Object)
+ThirdPersonController:Awake() (at D:\Malhar\Documents\mayaland\Assets\scripts\character\ThirdPersonController.cs:100)
+ 
+(Filename: D Line: 0)
+
+No run animation found. Turning off animations.
+UnityEngine.Debug:Internal_Log(Int32, String, Object)
+UnityEngine.Debug:Log(Object)
+ThirdPersonController:Awake() (at D:\Malhar\Documents\mayaland\Assets\scripts\character\ThirdPersonController.cs:104)
+ 
+(Filename: D Line: 0)
+
+No jump animation found and the character has canJump enabled. Turning off animations.
+UnityEngine.Debug:Internal_Log(Int32, String, Object)
+UnityEngine.Debug:Log(Object)
+ThirdPersonController:Awake() (at D:\Malhar\Documents\mayaland\Assets\scripts\character\ThirdPersonController.cs:108)
+ 
+(Filename: D Line: 0)
+
+System memory in use before: 18.6 MB.
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 18.5 MB.
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 524.
+Total: 0.814966 ms (FindLiveObjects: 0.042273 ms CreateObjectMapping: 0.014303 ms MarkObjects: 0.283839 ms  DeleteObjects: 0.018435 ms)
+
