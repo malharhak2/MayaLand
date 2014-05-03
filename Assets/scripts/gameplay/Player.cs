@@ -14,9 +14,6 @@ public class Player : Unit {
 	public int hungerPerGold;
 	public int hungerPerSecond;
 
-	public float moveSpeed;
-	public float rotationSpeed;
-
 	public float runCostPerSecond;
 
 	public float rollTime;
@@ -26,30 +23,34 @@ public class Player : Unit {
 	private bool rollInput = false;
 	private bool rolling = false;
 	public float rollDeadZone = 0.5f;
-	private ThirdPersonController charController;
+
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
+		team = AttackTeam.Players;
 		hunger = maxHunger;
-		charController = GetComponent<ThirdPersonController>();
 		charController.SetMoveSpeed (moveSpeed);
 		charController.StartRunning();
 		charController.rotateSpeed = rotationSpeed;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public override void Update () {
+		base.Update ();
 		hunger -= hungerPerSecond * Time.deltaTime;
 		stamina += staminaPerSecond * Time.deltaTime;
 		float hor = Input.GetAxis ("Horizontal");
 		float ver = Input.GetAxis ("Vertical");
 		if (hor != 0 || ver != 0) {
-			charController.StartRunning();
-			charController.SetMoveSpeed (new Vector2(hor, ver).magnitude * moveSpeed);
+			StartRunning();
+			SetMoveSpeed (new Vector2(hor, ver).magnitude * moveSpeed);
 		} else {
-			charController.StopMoving();
+			StopMoving();
 		}
 		CheckRoll ();
+		if (Input.GetButton ("Attack")) {
+			CastSpell (Spells.Arrow_1);
+		}
 
 	}
 
@@ -102,5 +103,12 @@ public class Player : Unit {
 			hunger = maxHunger;
 		}
 		hungerPart = hunger / maxHunger;
+		if (life < 0 || hunger < 0) {
+			Die();
+		}
+	}
+
+	void Die () {
+		Application.LoadLevel ("dead");
 	}
 }

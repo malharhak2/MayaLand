@@ -18,9 +18,11 @@ public class ModifyTerrain : MonoBehaviour {
 		Screen.lockCursor = true;
 
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
+
 		if(Input.GetMouseButtonDown(0)){
 			ReplaceBlockCursor(BlockType.Air);
 		}
@@ -36,7 +38,7 @@ public class ModifyTerrain : MonoBehaviour {
 		} else {
 			Screen.lockCursor = false;
 		}
-		LoadChunks(player.position, loadDistanceX, loadDistanceY);
+		//LoadChunks(player.position, loadDistanceX, loadDistanceY);
 	}
 	public void LoadChunks(Vector3 playerPos, float distToLoad, float distToUnload) {
 		for(int x=0;x<world.chunks.GetLength(0);x++){

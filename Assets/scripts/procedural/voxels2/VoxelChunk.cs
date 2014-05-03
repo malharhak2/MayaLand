@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 
 public class VoxelChunk : MonoBehaviour {
 
@@ -295,6 +296,7 @@ public class VoxelChunk : MonoBehaviour {
 		mesh.vertices = newVertices.ToArray();
 		mesh.uv = newUV.ToArray();
 		mesh.triangles = newTriangles.ToArray();
+		
 		mesh.Optimize ();
 		mesh.RecalculateNormals ();
 		

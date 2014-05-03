@@ -10,14 +10,17 @@ public class World : MonoBehaviour {
 	public BlockType[,,] data;
 	public int worldX = 16;
 	public int worldY = 16;
+
 	public int worldZ = 16;
 
 	public float blockSize = 0.25f;
 	public int actChunkSize;
 	// Use this for initialization
+
 	void Start () {
 		actChunkSize = (int) (chunkSize * blockSize);
 		data = new BlockType[worldX, worldY, worldZ];
+
 
 		for (int x = 0; x < worldX; x++) {
 			for (int z = 0; z < worldZ; z++) {
@@ -36,11 +39,11 @@ public class World : MonoBehaviour {
 				}
 			}
 		}
-
+	
 		chunks = new VoxelChunk[Mathf.FloorToInt (worldX / chunkSize),
 		                        Mathf.FloorToInt(worldY / chunkSize),
 		                        Mathf.FloorToInt(worldZ / chunkSize)];
-		//GenEverything();
+		GenEverything();
 
 	}
 	public void SetBlock (Vector3 position, BlockType block) {
