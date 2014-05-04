@@ -20,6 +20,7 @@ public class VoxelChunk : MonoBehaviour {
 	private List<Vector3> newVertices = new List<Vector3>();
 	private List<int> newTriangles = new List<int>();
 	private List<Vector2> newUV = new List<Vector2>();
+	private List<Color> newColors = new List<Color>();
 	private Mesh mesh;
 	private int triangleCount;
 	private int faceCount;
@@ -151,7 +152,7 @@ public class VoxelChunk : MonoBehaviour {
 		break;
 		}
 		Vector2 texturePos = chooseTexture(x, y, z, side);
-		Face (texturePos);
+		Face (texturePos, z, y, z);
 	}
 	void GenerateSlope (int x, int y, int z, BlockSide direction) {
 		if (direction != BlockSide.Top && direction != BlockSide.Bot) {
@@ -184,7 +185,7 @@ public class VoxelChunk : MonoBehaviour {
 			}
 
 			Vector2 texturePos = chooseTexture (x, y, z, direction);
-			Face (texturePos);
+			Face (texturePos, x, y ,z);
 			GenerateSlopeBorders(x, y, z, direction);
 		}
 
@@ -197,41 +198,41 @@ public class VoxelChunk : MonoBehaviour {
 			newVertices.Add (new Vector3(x - slopeLength, y - 1, z) * blockScale);
 			newVertices.Add (new Vector3(x, y, z) * blockScale);
 			newVertices.Add (new Vector3(x, y - 1, z) * blockScale);
-			Triangle(texture);
+			Triangle(texture, x, y, z);
 			newVertices.Add (new Vector3(x - slopeLength, y - 1, z + 1) * blockScale);
 			newVertices.Add (new Vector3(x, y - 1, z + 1) * blockScale);
 			newVertices.Add (new Vector3(x, y, z + 1) * blockScale);
-			Triangle(texture);
+			Triangle(texture, x, y, z);
 			break;
 		case BlockSide.Right:
 			newVertices.Add (new Vector3(x + 1, y, z) * blockScale);
 			newVertices.Add (new Vector3(x + 1 + slopeLength, y - 1, z) * blockScale);
 			newVertices.Add (new Vector3(x + 1, y - 1, z) * blockScale);
-			Triangle(texture);
+			Triangle(texture, x, y, z);
 			newVertices.Add (new Vector3(x + 1, y - 1, z + 1) * blockScale);
 			newVertices.Add (new Vector3(x + 1 + slopeLength, y - 1, z + 1) * blockScale);
 			newVertices.Add (new Vector3(x + 1, y, z + 1) * blockScale);
-			Triangle(texture);
+			Triangle(texture, x, y, z);
 			break;
 		case BlockSide.Front:
 			newVertices.Add (new Vector3(x + 1, y - 1, z + 1) * blockScale);
 			newVertices.Add (new Vector3(x + 1, y, z + 1) * blockScale);
 			newVertices.Add (new Vector3(x + 1, y - 1, z + 1 + slopeLength) * blockScale);
-			Triangle(texture);
+			Triangle(texture, x, y, z);
 			newVertices.Add (new Vector3(x, y - 1, z + 1) * blockScale);
 			newVertices.Add (new Vector3(x, y - 1, z + 1 + slopeLength) * blockScale);
 			newVertices.Add (new Vector3(x, y, z + 1) * blockScale);
-			Triangle(texture);
+			Triangle(texture, x, y, z);
 			break;
 		case BlockSide.Back:
 			newVertices.Add (new Vector3(x, y - 1, z) * blockScale);
 			newVertices.Add (new Vector3(x, y, z) * blockScale);
 			newVertices.Add (new Vector3(x, y - 1, z - slopeLength) * blockScale);
-			Triangle(texture);
+			Triangle(texture, x, y, z);
 			newVertices.Add (new Vector3(x + 1, y - 1, z) * blockScale);
 			newVertices.Add (new Vector3(x + 1, y - 1, z - slopeLength) * blockScale);
 			newVertices.Add (new Vector3(x + 1, y, z) * blockScale);
-			Triangle(texture);
+			Triangle(texture, x, y, z);
 			break;
 		}
 	}
@@ -254,9 +255,14 @@ public class VoxelChunk : MonoBehaviour {
 			newVertices.Add (new Vector3(x, y, z) * blockScale);
 		}
 		Vector2 texturePos = chooseTexture (x, y, z, direction);
-		Triangle (texturePos);
+		Triangle (texturePos, x, y, z);
 	}
-	void Face (Vector2 texturePos) {
+	void Face (Vector2 texturePos, int x, int y, int z) {
+		
+		newColors.Add (getColor(x, y, z));
+		newColors.Add (getColor(x, y, z));
+		newColors.Add (getColor(x, y, z));
+		newColors.Add (getColor(x, y, z));
 		int offset = faceCount * 4 + triangleCount * 3;
 		newTriangles.Add(offset  ); //1
 		newTriangles.Add(offset + 1 ); //2
@@ -268,7 +274,10 @@ public class VoxelChunk : MonoBehaviour {
 		addSquareUV (texturePos);
 		faceCount++;
 	}
-	void Triangle (Vector2 texturePos) {
+	void Triangle (Vector2 texturePos, int x, int y, int z) {
+		newColors.Add (getColor(x, y, z));
+		newColors.Add (getColor(x, y, z));
+		newColors.Add (getColor(x, y, z));
 		int offset = faceCount * 4 + triangleCount * 3;
 
 		newTriangles.Add (offset);
@@ -277,6 +286,9 @@ public class VoxelChunk : MonoBehaviour {
 
 		addTriangleUV (texturePos);
 		triangleCount++;
+	}
+	Color getColor (int x, int y, int z) {
+		return Color.Lerp(Color.red, Color.green, y);
 	}
 
 	Vector2 GetTexel (float x, float y) { // Mid pixel correction to avoid edge bleeding
@@ -302,6 +314,7 @@ public class VoxelChunk : MonoBehaviour {
 		mesh.Clear ();
 		mesh.vertices = newVertices.ToArray();
 		mesh.uv = newUV.ToArray();
+		mesh.colors = newColors.ToArray ();
 		mesh.triangles = newTriangles.ToArray();
 		
 		mesh.Optimize ();
@@ -312,6 +325,7 @@ public class VoxelChunk : MonoBehaviour {
 		
 		newVertices.Clear();
 		newUV.Clear();
+		newColors.Clear();
 		newTriangles.Clear();
 		
 		triangleCount = 0;

@@ -4,7 +4,7 @@ using System.Collections;
 public class Unit : MonoBehaviour {
 
 	public int maxLife;
-	protected float life;
+	public float life;
 	public float lifePart;
 
 	public int maxStamina;
@@ -30,6 +30,9 @@ public class Unit : MonoBehaviour {
 	private float lastSpell;
 	private float lastSpellTimer;
 	private bool isCasting = false;
+	public Transform lifebarPrefab;
+	public Transform uiRoot;
+	private Transform lifebar;
 	// Use this for initialization
 	public virtual void Start () {
 		charController = GetComponent<UnitController>();
@@ -38,6 +41,12 @@ public class Unit : MonoBehaviour {
 		spellsList = gameSpells.GetComponent<SpellsList>();
 		Debug.Log (spellsList.ToString ());
 		Debug.Log (typeof (SpellsList));
+		CreateLifebar();
+	}
+	void CreateLifebar() {
+		lifebar = Instantiate (lifebarPrefab, uiRoot.position, Quaternion.identity) as Transform;
+		WorldLifeBar lifeScript = lifebar.GetComponent<WorldLifeBar>();
+		lifeScript.SetTarget (transform, this);
 	}
 	public virtual void Awake() {
 
@@ -61,6 +70,9 @@ public class Unit : MonoBehaviour {
 				Debug.Log ("Stopping spell");
 				StopCasting();
 			}
+		}
+		if (life <= 0) { 
+			Die();
 		}
 	}
 	public void CastSpell (Spells spell) {
@@ -93,6 +105,10 @@ public class Unit : MonoBehaviour {
 		if (spell.attackTeam != team) {
 			life -= spell.damages;
 		}
+	}
+	public virtual void Die() {
+		Destroy (lifebar.gameObject);
+		Destroy(gameObject);
 	}
 	public Transform GetSpell (Spells spl) {
 		return spellsList.spellsPrefabs[spl];

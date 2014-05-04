@@ -33,7 +33,7 @@ public class Spell : MonoBehaviour {
 		Debug.Log ("Collision with" + collision.gameObject.name);
 	}
 	void OnTriggerEnter (Collider other) {
-		Debug.Log ("Trigger enter");
+		Debug.Log ("Trigger enter " + other.name);
 		other.SendMessage ("Hit", this);
 	}
 

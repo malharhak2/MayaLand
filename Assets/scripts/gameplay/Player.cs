@@ -171,12 +171,11 @@ public class Player : Unit {
 			hunger = maxHunger;
 		}
 		hungerPart = hunger / maxHunger;
-		if (life < 0 || hunger < 0) {
+		if (hunger < 0) {
 			Die();
 		}
 	}
-
-	void Die () {
+	public override void Die () {
 		Application.LoadLevel ("dead");
 	}
 }
